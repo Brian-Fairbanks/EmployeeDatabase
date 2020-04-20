@@ -1,10 +1,8 @@
 
-# Note Taker ![node.jsbadge](https://img.shields.io/static/v1?label=node.js&message=enabled&color=success)![express.jsbadge](https://img.shields.io/static/v1?label=Express.js&message=enabled&color=success)
+# Employee Database ![node.jsbadge](https://img.shields.io/static/v1?label=node.js&message=enabled&color=success)![mysqlbadge](https://img.shields.io/static/v1?label=mySQL&message=enabled&color=success)
 ## Description
-Hosted at [bkfnotes.heroku.com](https://bkfnotes.herokuapp.com/)
 
-An application that can be used to write, save, view and delete notes.
-Uses an express backend to save and retrieve note data from a JSON file.
+An npm, mysql database powered command line application, to add and check on employees, roles, and their managers for a given company.
 
 ## Table of Contents
 * [Installation](#installation)
