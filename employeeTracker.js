@@ -51,7 +51,7 @@ async function mainMenu() {
 }
 
 // function to view emplyoees.  Set up for View By - All, Department, or Manager
-async function viewEmployees(viewBy){
+async function viewEmployees(viewBy = ""){
     const data = await queryHelper.getEmployees(viewBy);
     console.table(data);
     mainMenu();
