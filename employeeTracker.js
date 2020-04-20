@@ -52,8 +52,21 @@ async function mainMenu() {
 
 // function to view emplyoees.  Set up for View By - All, Department, or Manager
 async function viewEmployees(viewBy = ""){
+    // extra data for more specific queries
+    if(viewBy == "Department"){
+        let department = await questions.getDepartment();
+        viewBy = `where departments.name = '${department.department}'`;
+    }
+    else if (viewBy == "Manager"){
+        let manager = await questions.getPersonID();
+        viewBy = `where employees.manager_id = '${manager}'`;
+    }
+
+    // run query for employees
     const data = await queryHelper.getEmployees(viewBy);
+    // print to table
     console.table(data);
+    //call back to main function
     mainMenu();
 }
 

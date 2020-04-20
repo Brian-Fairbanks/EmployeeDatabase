@@ -1,4 +1,5 @@
 const inquirer = require ("inquirer");
+const queryHelper = require("./db/queryHelper.js");
 
 function mainMenu(){
     return inquirer.prompt({
@@ -9,6 +10,35 @@ function mainMenu(){
     });
 }
 
+async function getDepartment(){
+    const data = await queryHelper.getDepartments();
+
+    return inquirer.prompt({
+        name: "department",
+        type: "list",
+        message: "Which Department?",
+        choices: data.map(dept=>dept.name)
+    });
+}
+
+async function getPersonID(){
+    // get list of all employee names/ids
+    const data = await queryHelper.getEmployeeNames();
+
+    // display all names as choices
+    const inq = await inquirer.prompt({
+        name: "person",
+        type: "list",
+        message: "Which Manager?",
+        choices: data.map(person=>person.name)
+    });
+
+    // return the id associated with the given name
+    return data.find(person => person.name == inq.person).id;
+}
+
 module.exports = {
-    mainMenu
+    mainMenu,
+    getDepartment,
+    getPersonID,
 }
