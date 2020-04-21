@@ -33,10 +33,10 @@ async function mainMenu() {
             viewEmployees('Manager');
             break;
         case "Add Employee":
-            postAuction();
+            addEmployee();
             break;
         case "Remove Employee":
-            postAuction();
+            deleteEmployee();
             break;
         case "Update Employee Role":
             postAuction();
@@ -70,6 +70,19 @@ async function viewEmployees(viewBy = ""){
     mainMenu();
 }
 
+//Add employee call
+async function addEmployee(){
+    let employee = await questions.newEmployee();
+    await queryHelper.addEmployee(employee);
+    mainMenu();
+}
+
+// delete Employee
+async function deleteEmployee(){
+    let person = await questions.getPersonID();
+    await queryHelper.deleteEmployee(person);
+    mainMenu();
+}
 
 
 function main(){

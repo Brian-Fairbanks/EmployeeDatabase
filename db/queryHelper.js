@@ -1,5 +1,8 @@
 const connection = require("./connection.js");
 
+
+//      Gets
+//========================================================================
 function getEmployees(addition){
     return connection.query(`
         SELECT employees.id as id, employees.first_name, employees.last_name,title, name, salary, CONCAT(mt.first_name, " ",mt.last_name) as manager 
@@ -33,10 +36,39 @@ function getRoles(){
     return connection.query(`select id,title from roles`)
 }
 
+
+//      Adds
+//========================================================================
+function addEmployee(person){
+    return connection.query(`
+        INSERT INTO employees SET ?`,
+        {
+            first_name:person.firstName,
+            last_name:person.lastName,
+            role_id:person.role,
+            manager_id:person.manager?person.manager:null
+        }
+    )
+}
+
+//      Deletes
+//========================================================================
+
+function deleteEmployee(person){
+    return connection.query(`
+        DELETE FROM employees
+        WHERE id = ?;
+    `,
+    [person]
+    )
+}
+
 module.exports ={
     getEmployees,
     getEmployeeNames,
     getDepartments,
     getRoles,
+    addEmployee,
+    deleteEmployee,
     connection
 }
