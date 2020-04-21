@@ -27,7 +27,7 @@ function getEmployeeNames(){
 
 function getDepartments(){
     return connection.query(`
-        SELECT name 
+        SELECT id, name 
         FROM departments
     `);
 }
@@ -51,6 +51,13 @@ function addEmployee(person){
     )
 }
 
+function addRole(role){
+    return connection.query(`
+        INSERT INTO roles SET ?`,
+        role
+    )
+}
+
 //      Deletes
 //========================================================================
 
@@ -70,5 +77,6 @@ module.exports ={
     getRoles,
     addEmployee,
     deleteEmployee,
+    addRole,
     connection
 }

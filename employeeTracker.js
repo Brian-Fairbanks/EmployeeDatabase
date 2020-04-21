@@ -4,6 +4,7 @@
 
 const queryHelper = require("./db/queryHelper.js");
 const questions = require("./questions.js");
+const cTable = require('console.table');
 
 
 /*##############################################################
@@ -38,6 +39,12 @@ async function mainMenu() {
         case "Remove Employee":
             deleteEmployee();
             break;
+        case "Add Role":
+            addRole();
+            break;
+        case "Remove Role":
+            deleteEmployee();
+            break;
         case "Update Employee Role":
             postAuction();
             break;
@@ -55,11 +62,11 @@ async function viewEmployees(viewBy = ""){
     // extra data for more specific queries
     if(viewBy == "Department"){
         let department = await questions.getDepartment();
-        viewBy = `where departments.name = '${department.department}'`;
+        viewBy = `where departments.name = '${department.name}'`;
     }
     else if (viewBy == "Manager"){
-        let manager = await questions.getPersonID();
-        viewBy = `where employees.manager_id = '${manager}'`;
+        let manager = await questions.getPerson();
+        viewBy = `where employees.manager_id = '${manager.id}'`;
     }
 
     // run query for employees
@@ -79,8 +86,15 @@ async function addEmployee(){
 
 // delete Employee
 async function deleteEmployee(){
-    let person = await questions.getPersonID();
-    await queryHelper.deleteEmployee(person);
+    let person = await questions.getPerson();
+    await queryHelper.deleteEmployee(person.id);
+    mainMenu();
+}
+
+// add Role
+async function addRole(){
+    let role = await questions.makeRole();
+    await queryHelper.addRole(role);
     mainMenu();
 }
 

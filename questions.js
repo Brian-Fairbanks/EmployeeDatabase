@@ -6,38 +6,51 @@ function mainMenu(){
         name: "action",
         type: "list",
         message: "What would you like to do?",
-        choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "Exit"]
+        choices: [
+            "View All Employees",
+            "View All Employees by Department",
+            "View All Employees by Manager",
+            "Add Employee",
+            "Remove Employee",
+            "Add Role",
+            "Remove Role",
+            "Update Employee Role",
+            "Update Employee Manager",
+            "Exit"]
     });
 }
 
+/*==    Get Data from Database
+======================================= */
+// return the Department Name and ID as selected by the name
 async function getDepartment(){
     const data = await queryHelper.getDepartments();
 
-    return inquirer.prompt({
+    const inq = await inquirer.prompt({
         name: "department",
         type: "list",
         message: "Which Department?",
         choices: data.map(dept=>dept.name)
     });
+
+    return data.find(dept => dept.name == inq.department);
 }
 
-async function getPersonID(){
-    // get list of all employee names/ids
-    const data = await queryHelper.getEmployeeNames();
+// return the Role title and ID as selected by the name
+async function getRole(){
+    const data = await queryHelper.getRoles();
 
-    // display all names as choices
     const inq = await inquirer.prompt({
-        name: "person",
+        name: "role",
         type: "list",
-        message: "Which Manager?",
-        choices: data.map(person=>person.name)
+        message: "Which Role?",
+        choices: data.map(role=>role.title)
     });
 
-    // return the id associated with the given name
-    return data.find(person => person.name == inq.person).id;
+    return data.find(role => role.title == inq.role);
 }
 
-async function getPersonID(){
+async function getPerson(){
     // get list of all employee names/ids
     const data = await queryHelper.getEmployeeNames();
 
@@ -50,8 +63,9 @@ async function getPersonID(){
     });
 
     // return the id associated with the given name
-    return data.find(person => person.name == inq.person).id;
+    return data.find(person => person.name == inq.person);
 }
+
 
 // gather all the data for a new employee
 async function newEmployee(){
@@ -96,9 +110,28 @@ async function newEmployee(){
     return person;
 }
 
+// return a new role object designed to match the mySQL insesrt into Roles
+async function makeRole(){
+    const department = await getDepartment();
+    const inq = await inquirer.prompt([
+        {
+            name:"title",
+            message:"Title for the Role?",   
+        }, 
+        {
+            name:"salary",
+            message:"Salary for the Role?",   
+        }
+    ]);
+
+    return {...inq, department_id:department.id};
+}
+
 module.exports = {
     mainMenu,
+    getRole,
     getDepartment,
-    getPersonID,
-    newEmployee
+    getPerson,
+    newEmployee,
+    makeRole
 }
