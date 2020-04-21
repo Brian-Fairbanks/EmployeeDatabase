@@ -12,10 +12,15 @@ function mainMenu(){
             "View All Employees by Manager",
             "Add Employee",
             "Remove Employee",
+
+            "View All Roles",
             "Add Role",
             "Remove Role",
+
+            "View All Departments",
             "Add Department",
             "Remove Department",
+            
             "Update Employee Role",
             "Update Employee Manager",
             "Exit"]
@@ -134,7 +139,7 @@ async function makeDepartment(){
     const inq = await inquirer.prompt([
         {
             name:"name",
-            message:"What is the department name??",   
+            message:"What is the department name?",   
         }
     ]);
 

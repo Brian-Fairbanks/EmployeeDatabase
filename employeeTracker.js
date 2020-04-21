@@ -34,18 +34,28 @@ async function mainMenu() {
         case "Remove Employee":
             deleteEmployee();
             break;
+
         case "Add Role":
             addRole();
             break;
         case "Remove Role":
             deleteRole();
             break;
+        case "View All Roles":
+            viewRoles();
+            break;
+
         case "Add Department":
             addDepartment();
             break;
         case "Remove Department":
             deleteDepartment();
             break;
+        case "View All Departments":
+            viewDepartments();
+            break;
+
+
         case "Update Employee Role": // to add
             postAuction();
             break;
@@ -78,6 +88,16 @@ async function viewEmployees(viewBy = ""){
     // print to table
     console.table(data);
     //call back to main function
+    mainMenu();
+}
+
+async function viewRoles(){
+    console.table(await queryHelper.getRoles());
+    mainMenu();
+}
+
+async function viewDepartments(){
+    console.table(await queryHelper.getDepartments());
     mainMenu();
 }
 
