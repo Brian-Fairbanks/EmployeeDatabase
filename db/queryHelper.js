@@ -33,6 +33,16 @@ function getRoles(){
     return connection.query(`select id,title from roles`)
 }
 
+function getBudget(dept){
+    return connection.query(`
+    SELECT sum(salary) as total
+    FROM employees
+    LEFT JOIN roles on employees.role_id = roles.id
+    WHERE ?;
+    `,
+    dept
+    );
+}
 
 //      Adds
 //========================================================================
@@ -86,6 +96,7 @@ module.exports ={
     getEmployeeNames,
     getDepartments,
     getRoles,
+    getBudget,
     addEmployee,
     deleteElem,
     addElem,

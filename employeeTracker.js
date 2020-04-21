@@ -63,9 +63,9 @@ async function mainMenu() {
             updateEmployeeManager();
             break;
 
-        // case "View Budgets":
-        //     viewBudgets();
-        //     break;
+        case "View Budgets":
+            viewBudgets();
+            break;
 
         case "Exit":
             queryHelper.connection.end();
@@ -105,6 +105,14 @@ async function viewRoles(){
 // View departments
 async function viewDepartments(){
     console.table(await queryHelper.getDepartments());
+    mainMenu();
+}
+
+// View Budget by departments
+async function viewBudgets(){
+    let department = await questions.getDepartment();
+    let budget = await queryHelper.getBudget( {department_id:department.id} );
+    console.log(`Budget for ${department.name} : $${budget[0].total?budget[0].total:0}`);
     mainMenu();
 }
 

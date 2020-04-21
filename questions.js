@@ -23,7 +23,7 @@ function mainMenu(){
             "Add Department",
             "Remove Department",
 
-            // "View Budgets",
+            "View Budgets",
 
             "Exit"]
     });
