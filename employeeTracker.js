@@ -8,11 +8,6 @@ const cTable = require('console.table');
 
 
 /*##############################################################
-#  Global Variables
-##############################################################*/
-
-
-/*##############################################################
 #  Helpers/Functions
 ##############################################################*/
 
@@ -45,10 +40,16 @@ async function mainMenu() {
         case "Remove Role":
             deleteRole();
             break;
-        case "Update Employee Role":
+        case "Add Department":
+            addDepartment();
+            break;
+        case "Remove Department":
+            deleteDepartment();
+            break;
+        case "Update Employee Role": // to add
             postAuction();
             break;
-        case "Update Employee Manager":
+        case "Update Employee Manager": // to add
             postAuction();
             break;
         case "Exit":
@@ -56,6 +57,9 @@ async function mainMenu() {
             break;
     }
 }
+
+/*#  View Functions
+##############################################################*/
 
 // function to view emplyoees.  Set up for View By - All, Department, or Manager
 async function viewEmployees(viewBy = ""){
@@ -77,6 +81,9 @@ async function viewEmployees(viewBy = ""){
     mainMenu();
 }
 
+/*#  Add Functions
+##############################################################*/
+
 //Add employee call
 async function addEmployee(){
     let employee = await questions.newEmployee();
@@ -84,17 +91,28 @@ async function addEmployee(){
     mainMenu();
 }
 
+// add Role
+async function addRole(){
+    let role = await questions.makeRole();
+    await queryHelper.addElem("roles",role);
+    mainMenu();
+}
+
+// add Department
+async function addDepartment(){
+    let department = await questions.makeDepartment();
+    await queryHelper.addElem("departments",department);
+    mainMenu();
+}
+
+
+/*#  Delete Functions
+##############################################################*/
+
 // delete Employee
 async function deleteEmployee(){
     let person = await questions.getPerson();
     await queryHelper.deleteElem("employees", person.id);
-    mainMenu();
-}
-
-// add Role
-async function addRole(){
-    let role = await questions.makeRole();
-    await queryHelper.addRole(role);
     mainMenu();
 }
 
@@ -105,20 +123,27 @@ async function deleteRole(){
     mainMenu();
 }
 
+// delete Department
+async function deleteDepartment(){
+    let department = await questions.getDepartment();
+    await queryHelper.deleteElem("departments", department.id);
+    mainMenu();
+}
+
+
+/*#  First Call
+##############################################################*/
 
 function main(){
     try{
         mainMenu();
-        //const data = await queryHelper.getEmployees();
-        //console.table( data);
-
     }catch(err) {
         console.log(err)
     }
 }
 
 /*##############################################################
-#  Main Code
+#  To Start
 ##############################################################*/
 
 main();

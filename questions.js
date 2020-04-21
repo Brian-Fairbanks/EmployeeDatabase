@@ -14,6 +14,8 @@ function mainMenu(){
             "Remove Employee",
             "Add Role",
             "Remove Role",
+            "Add Department",
+            "Remove Department",
             "Update Employee Role",
             "Update Employee Manager",
             "Exit"]
@@ -127,11 +129,24 @@ async function makeRole(){
     return {...inq, department_id:department.id};
 }
 
+// return a new role object designed to match the mySQL insesrt into Roles
+async function makeDepartment(){
+    const inq = await inquirer.prompt([
+        {
+            name:"name",
+            message:"What is the department name??",   
+        }
+    ]);
+
+    return inq;
+}
+
 module.exports = {
     mainMenu,
     getRole,
     getDepartment,
     getPerson,
     newEmployee,
-    makeRole
+    makeRole,
+    makeDepartment
 }
