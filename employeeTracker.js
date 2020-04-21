@@ -43,7 +43,7 @@ async function mainMenu() {
             addRole();
             break;
         case "Remove Role":
-            deleteEmployee();
+            deleteRole();
             break;
         case "Update Employee Role":
             postAuction();
@@ -87,7 +87,7 @@ async function addEmployee(){
 // delete Employee
 async function deleteEmployee(){
     let person = await questions.getPerson();
-    await queryHelper.deleteEmployee(person.id);
+    await queryHelper.deleteElem("employees", person.id);
     mainMenu();
 }
 
@@ -95,6 +95,13 @@ async function deleteEmployee(){
 async function addRole(){
     let role = await questions.makeRole();
     await queryHelper.addRole(role);
+    mainMenu();
+}
+
+// delete Role
+async function deleteRole(){
+    let role = await questions.getRole();
+    await queryHelper.deleteElem("roles", role.id);
     mainMenu();
 }
 

@@ -7,11 +7,11 @@ function getEmployees(addition){
     return connection.query(`
         SELECT employees.id as id, employees.first_name, employees.last_name,title, name, salary, CONCAT(mt.first_name, " ",mt.last_name) as manager 
         FROM employees
-        INNER JOIN roles
+        LEFT JOIN roles
         ON employees.role_id = roles.id
-        INNER JOIN departments
+        LEFT JOIN departments
         ON roles.department_id = departments.id
-        left JOIN employees as mt
+        LEFT JOIN employees as mt
         ON employees.manager_id = mt.id
         ${addition};
     `);
@@ -61,12 +61,12 @@ function addRole(role){
 //      Deletes
 //========================================================================
 
-function deleteEmployee(person){
+function deleteElem(table, id){
     return connection.query(`
-        DELETE FROM employees
+        DELETE FROM ??
         WHERE id = ?;
     `,
-    [person]
+    [table, id]
     )
 }
 
@@ -76,7 +76,7 @@ module.exports ={
     getDepartments,
     getRoles,
     addEmployee,
-    deleteEmployee,
+    deleteElem,
     addRole,
     connection
 }
