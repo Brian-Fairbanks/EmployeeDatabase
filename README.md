@@ -11,6 +11,7 @@ An npm, mysql database powered command line application, to add and check on emp
 * [Credits](#contributing)
 * [Testing](#tests)
 * [Questions](#questions)
+* [Demo](#demo)
 
 ## Installation
 ```
@@ -30,4 +31,7 @@ Manually tested.  No additinal frameworks used.
 
 ## Questions
 <img src="https://avatars0.githubusercontent.com/u/59707181?v=4" height="48" width="48"> | brian.k.fairbanks@gmail.com
+
+## Demo
+![CLI Demo](https://github.com/Brian-Fairbanks/EmployeeDatabase/blob/master/Assets/trackerDemo.gif?raw=true)
 
