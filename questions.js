@@ -12,6 +12,8 @@ function mainMenu(){
             "View All Employees by Manager",
             "Add Employee",
             "Remove Employee",
+            "Update Employee Role",
+            "Update Employee Manager",
 
             "View All Roles",
             "Add Role",
@@ -20,9 +22,9 @@ function mainMenu(){
             "View All Departments",
             "Add Department",
             "Remove Department",
-            
-            "Update Employee Role",
-            "Update Employee Manager",
+
+            // "View Budgets",
+
             "Exit"]
     });
 }
@@ -113,7 +115,6 @@ async function newEmployee(){
     let roleId =  roles.find(role => role.title == inq.role).id;
 
     let person = {firstName:inq.firstName, lastName:inq.lastName, role:roleId, manager:managerId};
-    console.log(person);
     return person;
 }
 

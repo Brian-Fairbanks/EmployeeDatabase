@@ -67,6 +67,20 @@ function deleteElem(table, id){
     )
 }
 
+
+//      Updates
+//========================================================================
+
+function updateElem(table, update, person){
+    return connection.query(`
+        UPDATE ??
+        SET ?
+        WHERE ?;
+    `,
+    [table, update, person]
+    );
+}
+
 module.exports ={
     getEmployees,
     getEmployeeNames,
@@ -75,5 +89,6 @@ module.exports ={
     addEmployee,
     deleteElem,
     addElem,
+    updateElem,
     connection
 }

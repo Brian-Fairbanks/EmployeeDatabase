@@ -57,11 +57,16 @@ async function mainMenu() {
 
 
         case "Update Employee Role": // to add
-            postAuction();
+            updateEmployeeRole();
             break;
         case "Update Employee Manager": // to add
-            postAuction();
+            updateEmployeeManager();
             break;
+
+        // case "View Budgets":
+        //     viewBudgets();
+        //     break;
+
         case "Exit":
             queryHelper.connection.end();
             break;
@@ -91,11 +96,13 @@ async function viewEmployees(viewBy = ""){
     mainMenu();
 }
 
+// View roles
 async function viewRoles(){
     console.table(await queryHelper.getRoles());
     mainMenu();
 }
 
+// View departments
 async function viewDepartments(){
     console.table(await queryHelper.getDepartments());
     mainMenu();
@@ -147,6 +154,25 @@ async function deleteRole(){
 async function deleteDepartment(){
     let department = await questions.getDepartment();
     await queryHelper.deleteElem("departments", department.id);
+    mainMenu();
+}
+
+/*#  update Functions
+##############################################################*/
+
+// Update Employee role
+async function updateEmployeeRole(){
+    let person = await questions.getPerson();
+    let role = await questions.getRole();
+    await queryHelper.updateElem("employees",{role_id:role.id}, {id:person.id});
+    mainMenu();
+}
+
+// Update Employee manager
+async function updateEmployeeManager(){
+    let person = await questions.getPerson();
+    let manager = await questions.getPerson();
+    await queryHelper.updateElem("employees",{manager_id:manager.id}, {id:person.id});
     mainMenu();
 }
 
