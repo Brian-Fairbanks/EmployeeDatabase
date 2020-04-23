@@ -4,6 +4,10 @@
 
 An npm, mysql database powered command line application, to add and check on employees, roles, and their managers for a given company.
 
+This app will launch you into a CLI based main menu, where you can view each table in your database, add, remove, or update.
+It will also give functionality for updating specific parts of your employees, like their current roles, or mangers.
+It also gives the ability to check on current budgets alloted for each department, based on salaries alone.
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
@@ -16,6 +20,8 @@ An npm, mysql database powered command line application, to add and check on emp
 ## Installation
 ```
 npm install
+run schema.sql to set up database
+set up .env file, based on .env.example
 ```
 ## Usage
 ```
